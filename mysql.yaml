@@ -1,0 +1,8 @@
+- namee: playbook  for installing mysqldb 
+  hosts: mysql
+  become: yes
+  tasks:
+  - name: task for installing mysql
+    ansible.builtin.package:
+      name: mysql
+      state: present
