@@ -45,7 +45,9 @@
       ansible.builtin.dnf:
         name: mysql
         state: present
-    - name: Import backend.sql into MySQL
-      ansible.builtin.shell: 
-        cmd: "mysql -h 172.31.19.135 -uroot -pExpenseApp@1 < /app/schema/backend.sql"
-    
+    - name: Execute SQL commands
+      community.mysql.mysql_query:
+        login_user: root
+        login_password: ExpenseApp@1
+        login_host: 172.31.19.135
+        query: "SOURCE /app/schema/backend.sql;"
