@@ -4,10 +4,15 @@
   vars:
     mysql_root_password: "ExpenseApp@1"
     localhost: 172.31.19.135
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
     - name: task for installing mysql
       ansible.builtin.package:
         name: mysql-server
+        state: present
+    - name: Install PyMySQL (or mysqlclient if preferred)
+      ansible.builtin.pip:
+        name: PyMySQL  # or mysqlclient
         state: present
     - name: Enable and start mysqld service
       ansible.builtin.service:

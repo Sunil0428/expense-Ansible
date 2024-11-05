@@ -48,6 +48,7 @@
       ansible.builtin.dnf:
         name: mysql
         state: present
+        
     - name: Install PyMySQL (for Python 3.x compatibility)
       ansible.builtin.pip:
         name: PyMySQL
