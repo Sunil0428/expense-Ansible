@@ -45,14 +45,12 @@
       ansible.builtin.dnf:
         name: mysql
         state: present
-        
     - name: Install PyMySQL (for Python 3.x compatibility)
       ansible.builtin.pip:
         name: PyMySQL
         state: present
 
     - name: Execute SQL commands
-      community.mysql.mysql_query:
       community.mysql.mysql_db:
         login_user: root
         login_password: ExpenseApp@1
