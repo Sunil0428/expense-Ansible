@@ -27,7 +27,7 @@
         force: no 
     - name: Execute a command in /app directory
       ansible.builtin.command:
-          cmd: unzip /tmp/backend.zip # Replace with the command you want to run
+          cmd: "unzip /tmp/backend.zip"  # Replace with the command you want to run
       args:
         chdir: /app
     - name: Install npm dependencies
