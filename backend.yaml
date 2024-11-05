@@ -41,3 +41,12 @@
       ansible.builtin.systemd:
         name: backend
         enabled: yes
+    - name: Install MySQL Client
+      ansible.builtin.dnf:
+        name: mysql
+        state: present
+    - name: Import backend.sql into MySQL
+      ansible.builtin.command: 
+        cmd: "mysql -h 172.31.19.135 -uroot -pExpenseApp@1 < /app/schema/backend.sql"
+      args:
+        warn: false
