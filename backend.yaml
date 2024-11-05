@@ -36,19 +36,10 @@
       ansible.builtin.copy:
         src: /home/ec2-user/expense-Ansible/backend.service
         dest: /etc/systemd/system/backend.service
-    - name: Start backend service
-      ansible.builtin.systemd:
-        name: backend
-        state: started
-    - name: Enable backend service to start on boot
-      ansible.builtin.systemd:
-        name: backend
-        enabled: yes
-
     - name: Install PyMySQL (for Python 3.x compatibility)
       ansible.builtin.pip:
-        name: PyMySQL
-        state: present
+        name: 
+        - PyMySQL
         executable: pip3.9
 
     - name: Execute SQL commands
@@ -59,5 +50,14 @@
         state: import
         name: all
         target: /app/schema/backend.sql
+
+    - name: Start backend service
+      ansible.builtin.systemd:
+        name: backend
+        state: started
+    - name: Enable backend service to start on boot
+      ansible.builtin.systemd:
+        name: backend
+        enabled: yes
     
         
