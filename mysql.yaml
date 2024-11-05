@@ -15,9 +15,9 @@
         enabled: yes
         state: started
     - name: Ensure MySQL root password is set
-        ansible.builtin.mysql_user:
-          name: root
-          host: localhost
-          password: "{{ mysql_root_password }}"
-          login_unix_socket: /var/lib/mysql/mysql.sock
-          state: present
+      ansible.builtin.mysql_user:
+        name: root
+        host: localhost
+        password: "{{ mysql_root_password }}"
+        login_unix_socket: /var/lib/mysql/mysql.sock
+        state: present
