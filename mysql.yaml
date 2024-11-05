@@ -35,4 +35,5 @@
 
     - name: setting root password
       ansible.builtin.command:
-        cmd: mysql -h "{{localhost}}" -u root -p"{{mysql_root_password}}"
+        cmd: "mysql -h {{localhost}} -u root -p{{mysql_root_password}}"
+      when: mysql_info.false is true
