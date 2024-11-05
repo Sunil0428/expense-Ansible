@@ -37,5 +37,5 @@
 
     - name: setting root password
       ansible.builtin.command:
-        cmd: "mysql -h {{localhost}} -u root -p{{mysql_root_password}}"
+        cmd: "mysql_secure_installation --set-root-pass ExpenseApp@1"
       when: mysql_info.failed is true
