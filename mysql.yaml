@@ -24,7 +24,7 @@
     - name: checking whether root password is set or not
       community.mysql.mysql_info:
         login_user: root
-        login_password: rootpass
+        login_password: "{{mysql_root_password}}"
         login_host: "{{localhost}}"
       ignore_errors: true
       register: mysql_info
@@ -32,3 +32,7 @@
     - name: checking the error info
       ansible.builtin.debug:
         msg: "{{mysql_info}}"
+
+    - name: setting root password
+      ansible.builtin.command:
+        cmd: mysql -h "{{localhost}}" -u root -p"{{mysql_root_password}}"
