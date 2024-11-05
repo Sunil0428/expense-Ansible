@@ -54,5 +54,8 @@
         state: import
         name: all
         target: /app/schema/backend.sql
-        
+    - name: Install PyMySQL (for Python 3.x compatibility)
+      ansible.builtin.pip:
+        name: PyMySQL
+        state: present
         
