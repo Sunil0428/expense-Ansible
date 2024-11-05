@@ -27,12 +27,18 @@
         force: no 
     - name: Execute a command in /app directory
       ansible.builtin.command:
-          cmd: "unzip /tmp/backend.zip"  # Replace with the command you want to run
+          cmd: "unzip /tmp/backend.zip" # Replace with the command you want to run
       args:
         chdir: /app
+    - name: Ensure /app directory exists
+      ansible.builtin.file:
+        path: /app
+        state: directory
     - name: Install npm dependencies
-      ansible.builtin.shell:
-        npm install
+      ansible.builtin.command:
+        cmd: npm install
+      args:
+        chdir: /app
     - name: Copy config file to Node.js application
       ansible.builtin.copy:
         src: /home/ec2-user/expense-Ansible/backend.service
