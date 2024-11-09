@@ -3,7 +3,7 @@
   become: yes
   vars:
     mysql_root_password: "ExpenseApp@1"
-    localhost: 172.31.19.135
+    login_host: 172.31.90.70
     ansible_python_interpreter: /usr/bin/python3
   tasks:
     - name: Install PyMySQL (or mysqlclient if preferred)
@@ -27,7 +27,7 @@
       community.mysql.mysql_info:
         login_user: root
         login_password: "{{mysql_root_password}}"
-        login_host: "{{localhost}}"
+        login_host: "{{login_host}}"
       ignore_errors: true
       register: mysql_info
     
