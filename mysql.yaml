@@ -6,6 +6,11 @@
     login_host: 172.31.90.70
     ansible_python_interpreter: /usr/bin/python3
   tasks:
+    ansible.builtin.pip:
+    - name:
+      - boto3
+      - botocore
+      executable: pip3.9
     - name: task for installing mysql
       ansible.builtin.package:
         name: mysql-server
