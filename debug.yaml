@@ -3,5 +3,5 @@
   gather_facts: yes
   tasks:
     - name: Display the Python interpreter path
-      debug:
+      ansible.builtin.debug:
         msg: "{{ ansible_facts['ansible_python']['executable'] }}"
