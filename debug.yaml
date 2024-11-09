@@ -1,0 +1,7 @@
+# check_python.yml
+- hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Display the Python interpreter path
+      debug:
+        msg: "{{ ansible_facts['ansible_python']['executable'] }}"
