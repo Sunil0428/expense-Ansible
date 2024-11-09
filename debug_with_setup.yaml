@@ -1,0 +1,10 @@
+# debug_with_setup.yaml
+- hosts: localhost
+  gather_facts: no  # Disable default gathering
+  tasks:
+  - name: Gather facts explicitly
+      setup:
+
+  - name: Display the Python interpreter path
+    ansible.builtin.debug:
+      msg: "{{ ansible_facts['ansible_python']['executable'] }}"
