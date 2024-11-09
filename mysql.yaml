@@ -6,12 +6,6 @@
     login_host: 172.31.90.70
     ansible_python_interpreter: /usr/bin/python3
   tasks:
-    - name: Install PyMySQL (or mysqlclient if preferred)
-      ansible.builtin.pip:
-        name: 
-        - PyMySQL  # or mysqlclient
-        executable: pip3.9
-
     - name: task for installing mysql
       ansible.builtin.package:
         name: mysql-server
