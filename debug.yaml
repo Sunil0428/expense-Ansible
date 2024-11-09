@@ -2,6 +2,6 @@
 - hosts: localhost
   gather_facts: yes
   tasks:
-    - name: Display the Python interpreter path
-      ansible.builtin.debug:
-        msg: "{{ ansible_facts['ansible_python']['executable'] }}"
+  - name: Display the Python interpreter path
+    ansible.builtin.debug:
+      msg: "{{ ansible_facts['ansible_python']['executable'] }}"
