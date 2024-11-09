@@ -1,7 +1,10 @@
-# debug_all_facts.yaml
+# debug_with_python_interpreter.yaml
 - hosts: localhost
-  gather_facts: yes
+  gather_facts: no  # Disable default fact gathering
+  vars:
+    ansible_python_interpreter: /usr/bin/python3  # Specify your Python interpreter path
   tasks:
-  - name: Display all gathered facts
+  - name: Display the Python interpreter path
     ansible.builtin.debug:
-      var: ansible_facts
+      msg: "{{ ansible_python_interpreter }}"
+
