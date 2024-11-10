@@ -15,6 +15,11 @@
     loop:
     - nodejs
     - mysql
+  - name: ansible to install boto3 botocore
+    ansible.builtin.pip:
+      name:
+      - PyMySQL
+      executable: pip3.9
   - name: Add the user 'expense' with a specific uid and a primary group of 'admin'
     ansible.builtin.user:
       name: expense
