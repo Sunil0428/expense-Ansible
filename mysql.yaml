@@ -9,8 +9,7 @@
     - name: ansible to install boto3 botocore
       ansible.builtin.pip:
         name:
-        - boto3
-        - botocore
+        - PyMySQL
         executable: pip3.9
     - name: task for installing mysql
       ansible.builtin.package:

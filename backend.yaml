@@ -1,63 +1,30 @@
-- name: playbook for setting up backend
-  hosts: backend
+- name: configuring backend for expense
+  hosts: local
   become: yes
-  tasks: 
-    - name: Disable Node.js module
+  tasks:
+    - name: disable default nodejs
       ansible.builtin.command:
-        cmd: dnf module disable nodejs -y
-    - name: Enable Node.js module
+      cmd: dnf module disable nodejs -y
+    - name: disable default nodejs
       ansible.builtin.command:
-        cmd: dnf module enable nodejs:20 -y
-    - name: Installing nodejs
-      ansible.builtin.dnf:
-        name: "{{ item }}"
+      cmd: dnf module enable nodejs:20 -y
+    - name: installing nodejs
+      ansible.builtin.package:
+        name: {{ item }}
         state: present
       loop:
       - nodejs
       - mysql
-    - name: Create user 'expense'
+    - name: Add the user 'expense' with a specific uid and a primary group of 'admin'
       ansible.builtin.user:
         name: expense
-        state: present
-    - name: Create /app directory
+    - name: Create a directory if it does not exist
       ansible.builtin.file:
         path: /app
         state: directory
-    - name: Ensure /app directory exists
-      ansible.builtin.file:
-        path: /app
-        state: directory
-    - name: Install npm dependencies
-      ansible.builtin.command:
-        cmd: npm install
-      args:
-        chdir: /app
-    - name: Copy config file to Node.js application
-      ansible.builtin.copy:
-        src: /home/ec2-user/expense-Ansible/backend.service
-        dest: /etc/systemd/system/backend.service
-    - name: Install PyMySQL (for Python 3.x compatibility)
-      ansible.builtin.pip:
-        name: 
-        - PyMySQL
-        executable: pip3.9
-
-    - name: Execute SQL commands
-      community.mysql.mysql_db:
-        login_user: root
-        login_password: ExpenseApp@1
-        login_host: 172.31.19.135
-        state: import
-        name: all
-        target: /app/schema/backend.sql
-
-    - name: Start backend service
-      ansible.builtin.systemd:
-        name: backend
-        state: started
-    - name: Enable backend service to start on boot
-      ansible.builtin.systemd:
-        name: backend
-        enabled: yes
+    - name: Download backend.zip from S3
+      ansible.builtin.get_url:
+        url: "https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip"
+        dest: "/tmp/backend.zip"
+        mode: '0644'
     
-        
