@@ -52,11 +52,15 @@
       name: backend
       state: started
       enabled: yes
-  - name: Execute SQL file on MySQL server
-    ansible.builtin.shell:
-      cmd: "mysql -h 172.31.90.70 -u root -pExpenseApp@1 < /app/schema/backend.sql"
-    args:
-      executable: /bin/bash
+  - name: import mysql data
+    community.mysql.mysql_db:
+      login_user: root
+      login_password: ExpenseApp@1
+      login_host: 172.31.90.70
+      target: /app/schema/backend.sql
+      name: all 
+      state: dump
+  
   - name: Restart the backend service
     ansible.builtin.systemd:
       name: backend
