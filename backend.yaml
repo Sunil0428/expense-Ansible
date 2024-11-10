@@ -45,7 +45,6 @@
     ansible.builtin.copy:
        src: "backend.service"
        dest: "/etc/systemd/system/backend.service"
-       mode: "0644"
   - name: Enable and start backend service
     ansible.builtin.systemd:
       name: backend
