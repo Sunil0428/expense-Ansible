@@ -10,7 +10,7 @@
       cmd: dnf module enable nodejs:20 -y
     - name: installing nodejs
       ansible.builtin.package:
-        name: {{ item }}
+        name: "{{ item }}"
         state: present
       loop:
       - nodejs
