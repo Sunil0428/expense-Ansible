@@ -41,3 +41,25 @@
        src: "backend.service"
        dest: "/etc/systemd/system/backend.service"
        mode: "0644"
+  - name: Enable and start backend service
+    ansible.builtin.systemd:
+      name: backend
+      enabled: yes
+      state: started
+      daemon_reload: yes
+  - name: Enable and start backend service
+    ansible.builtin.systemd:
+      name: backend
+      state: started
+      enabled: yes
+  - name: Execute SQL file on MySQL server
+    ansible.builtin.shell:
+      cmd: "mysql -h 172.31.90.70 -u root -pExpenseApp@1 < /app/schema/backend.sql"
+    args:
+      executable: /bin/bash
+  - name: Restart the backend service
+    ansible.builtin.systemd:
+      name: backend
+      state: restarted
+
+
