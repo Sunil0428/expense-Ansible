@@ -3,7 +3,7 @@
   become: yes
   vars:
     mysql_root_password: "ExpenseApp@1"
-    login_host: 172.31.90.70
+    login_host: 172.31.83.153
     ansible_python_interpreter: /usr/bin/python3
   tasks:
     - name: ansible to install boto3 botocore
