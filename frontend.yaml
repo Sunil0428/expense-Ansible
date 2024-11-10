@@ -30,7 +30,6 @@
     ansible.builtin.copy:
        src: "expense.conf"
        dest: "/etc/nginx/default.d/expense.conf"
-       mode: "0644"
   - name: Restart nginx
     ansible.builtin.systemd:
       name: nginx
